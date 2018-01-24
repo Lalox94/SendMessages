@@ -6,8 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +26,12 @@ public class TiendaListActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tienda_list);
 
-
         showsStoreinFireBase();
-
     }
 
     public void showsStoreinFireBase() {
@@ -44,15 +45,30 @@ public class TiendaListActivity extends AppCompatActivity {
                 new MyAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(String name, int position) {
-                        Toast.makeText(TiendaListActivity.this, name + " - " + position,
-                                Toast.LENGTH_LONG)
-                                .show();
+                        DatabaseReference id = mDatabase.child("Pedidos").push();
+                        WriteDataUserRequest(id);
+                        WriteDataStoreRequest(id);
                     }
                 });
         // Boost Perfomance
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void WriteDataStoreRequest(DatabaseReference id) {
+        String Token = "eG5js0gEfsI:APA91bFTeOn_rpXu5k02OajhyN-PveAPK-bLpgB25RFC2uMel_r51kh88zI1hiMersOGndHCVIg1SVq-onh_C4Tm2ruuLS5L49KuJccmYBYZmT1IIeu_YdeJRdzpiGETVADXizN4nMG6";
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Tienda tienda = new Tienda("MacOs",Token);
+        id.child("Tienda").setValue(tienda);
+    }
+
+    private void WriteDataUserRequest(DatabaseReference id) {
+        String Token = "cD3FrzxXidc:APA91bEj8Nz2fxbZeM8fGdROK1G5-vKkDeUZf9WFg5ivbDBD1QpmdXy4q-rTakFZn9cVMHs7OLbQaaqB8ffdT6mCXyGgbB5BQTBrarBZZuIqcTa7T0KX3xUKaz0isD54xYoYPHtKKjoK";
+        Tienda tienda = new Tienda("Telefono",Token);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        // Change value for User Model
+        id.child("Usuario").setValue(tienda);
     }
 
     private List<String> getAllTiendas() {
