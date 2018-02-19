@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void WriteUserNameInFirebase(){
         final String Token = FirebaseInstanceId.getInstance().getToken();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

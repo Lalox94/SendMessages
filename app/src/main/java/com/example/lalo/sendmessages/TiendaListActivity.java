@@ -1,18 +1,12 @@
 package com.example.lalo.sendmessages;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +51,7 @@ public class TiendaListActivity extends AppCompatActivity {
     }
 
     private void WriteDataStoreRequest(DatabaseReference id) {
-        String Token = "eG5js0gEfsI:APA91bFTeOn_rpXu5k02OajhyN-PveAPK-bLpgB25RFC2uMel_r51kh88zI1hiMersOGndHCVIg1SVq-onh_C4Tm2ruuLS5L49KuJccmYBYZmT1IIeu_YdeJRdzpiGETVADXizN4nMG6";
+        String Token = "eEtn5yxKF8I:APA91bF6di9pEYPxqZAscPhGREc0arO-l1ud6-a_SKlggOSPg9Xkj6nTmT-5IdFAozvUV84n5PtNu5pWDCmcpdDcNbft1AYz94zfo9TUzbZl_QoQpTtd0Ikh1H7PF_eI90Udh6Ia1SlN";
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Tienda tienda = new Tienda("MacOs",Token);
         id.child("Tienda").setValue(tienda);
