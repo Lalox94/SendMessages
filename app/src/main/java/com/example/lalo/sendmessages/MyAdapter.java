@@ -12,17 +12,17 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<String> tiendas;
-    private int layout;
     private OnItemClickListener itemClickListener;
+    int layout;
 
-    public MyAdapter (List<String> tiendas, int layout, OnItemClickListener listener ) {
-        this.tiendas = tiendas;
+    public MyAdapter (Tienda tienda, int layout, OnItemClickListener listener) {
+        this.tiendas =  tiendas;
         this.layout = layout;
         this.itemClickListener = listener;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -30,7 +30,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(tiendas.get(position),itemClickListener);
+        holder.bind(tiendas.get(position), itemClickListener);
     }
 
     @Override
@@ -48,11 +48,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         public void bind(final String name, final OnItemClickListener listener) {
             this.textViewTienda.setText(name);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listener.onItemClick(name, getAdapterPosition());
+
                 }
             });
         }
@@ -60,5 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(String name, int position);
+
     }
+
 }

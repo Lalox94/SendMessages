@@ -7,22 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <Button
-        android:id="@+id/buttonRegistrar"
+        android:id="@+id/buttonSearchStores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrar en Firebase"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Buscar Tienda"
         tools:layout_editor_absoluteX="116dp"
         tools:layout_editor_absoluteY="231dp" />
 
     <Button
-        android:id="@+id/buttonSendMenssage"
+        android:id="@+id/buttonCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonRegistrar"
-        android:text="Enviar Mensaje"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="231dp" />
+        android:layout_below="@+id/buttonSearchStores"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="Button" />
 
 
 </RelativeLayout>

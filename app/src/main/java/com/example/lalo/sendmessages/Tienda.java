@@ -3,32 +3,53 @@ package com.example.lalo.sendmessages;
 
 public class Tienda {
 
-    private String mName;
-    private String mToken;
+    private String Nombre;
+    private String Token;
+    private String Distancia;
+    private String Horario;
 
-    public Tienda() { }
+    public Tienda() {
+    }  // Needed for Firebase
 
-    public Tienda(String name, String token) {
 
-        this.mName = name;
-        this.mToken = token;
+    public Tienda(String Distancia, String Horario, String Nombre, String Token) {
+
+        this.Nombre = Nombre;
+        this.Token = Token;
+        this.Distancia = Distancia;
+        this.Horario = Horario;
     }
 
-    public String getName() {
-        return mName;
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    public void setNombre(String nombre) {
+        Nombre = nombre;
     }
 
     public String getToken() {
-        return mToken;
+        return Token;
     }
 
-    public void setToken(String mToken) {
-        this.mToken = mToken;
+    public void setToken(String token) {
+        Token = token;
     }
 
+    public String getDistancia() {
+        return Distancia;
+    }
 
+    public void setDistancia(String distancia) {
+        Distancia = distancia;
+    }
+
+    public String getHorario() {
+        return Horario;
+    }
+
+    public void setHorario(String horario) {
+        Horario = horario;
+    }
 }
+
