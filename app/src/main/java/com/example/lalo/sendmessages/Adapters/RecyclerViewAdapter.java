@@ -1,4 +1,4 @@
-package com.example.lalo.sendmessages;
+package com.example.lalo.sendmessages.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,23 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.lalo.sendmessages.R;
+import com.example.lalo.sendmessages.Models.Tienda;
+
 import java.util.List;
 
-
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private List<String> tiendas;
     private OnItemClickListener itemClickListener;
     int layout;
 
-    public MyAdapter (Tienda tienda, int layout, OnItemClickListener listener) {
+    public RecyclerViewAdapter(Tienda tienda, int layout, OnItemClickListener listener) {
         this.tiendas =  tiendas;
         this.layout = layout;
         this.itemClickListener = listener;
     }
 
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -52,7 +54,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     listener.onItemClick(name, getAdapterPosition());
-
                 }
             });
         }
@@ -60,7 +61,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(String name, int position);
-
     }
 
 }

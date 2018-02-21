@@ -1,4 +1,4 @@
-package com.example.lalo.sendmessages;
+package com.example.lalo.sendmessages.Models;
 
 
 public class Tienda {

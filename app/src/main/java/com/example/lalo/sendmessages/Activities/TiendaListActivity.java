@@ -1,5 +1,6 @@
-package com.example.lalo.sendmessages;
+package com.example.lalo.sendmessages.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapter;
+import com.example.lalo.sendmessages.R;
+import com.example.lalo.sendmessages.Models.Tienda;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-
 
 public class TiendaListActivity extends AppCompatActivity {
 
@@ -46,30 +48,29 @@ public class TiendaListActivity extends AppCompatActivity {
                         .setQuery(query, Tienda.class)
                         .build();
 
-        adapter2 = new FirebaseRecyclerAdapter<Tienda, MyAdapter.ViewHolder>(options) {
+        adapter2 = new FirebaseRecyclerAdapter<Tienda, RecyclerViewAdapter.ViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, int position, @NonNull Tienda model) {
-                holder.bind(options.getSnapshots().get(position).getNombre(), new MyAdapter.OnItemClickListener() {
+            protected void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position, @NonNull Tienda model) {
+                holder.bind(options.getSnapshots().get(position).getNombre(), new RecyclerViewAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(String name, int position) {
-                        Toast.makeText(getApplicationContext(),"Sup my nigga", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(getApplicationContext(), StoreActivity.class);
+                        startActivity(i);
                     }
                 });
             }
 
             @Override
-            public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 // Create a new instance of the ViewHolder, in this case we are using a custom
                 // layout called R.layout.message for each item
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.recycler_view_item, parent, false);
-                MyAdapter.ViewHolder vh = new MyAdapter.ViewHolder(view);
+                RecyclerViewAdapter.ViewHolder vh = new RecyclerViewAdapter.ViewHolder(view);
 
                 return vh;
             }
         };
-
-        // MyAdapter adapter = new MyAdapter(names, R.layout.recycler_view_item);
 
         // Boost Perfomance
         mRecyclerView.setHasFixedSize(true);
