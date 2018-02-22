@@ -32,7 +32,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 return storeContactTab;
             default:
                 return null;
-
         }
 
     }

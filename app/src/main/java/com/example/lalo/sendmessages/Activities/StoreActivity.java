@@ -21,9 +21,9 @@ public class StoreActivity extends AppCompatActivity implements MyProductListTab
         setContentView(R.layout.activity_store);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("Mi Lista"));
+        tabLayout.addTab(tabLayout.newTab().setText("Productos de la Tienda"));
+        tabLayout.addTab(tabLayout.newTab().setText("Contacto"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

@@ -19,14 +19,23 @@
         tools:layout_editor_absoluteX="116dp"
         tools:layout_editor_absoluteY="231dp" />
 
-    <Button
-        android:id="@+id/buttonCheck"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonSearchStores"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:text="Button" />
+        android:id="@+id/toolbarMainActivity"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Domily"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+    </android.support.v7.widget.Toolbar>
 
 
 </RelativeLayout>
