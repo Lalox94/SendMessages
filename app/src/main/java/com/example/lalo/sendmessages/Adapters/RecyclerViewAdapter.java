@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -35,7 +36,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
         holder.bind(tiendas.get(position), itemClickListener);
     }
 
@@ -46,12 +46,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
         private TextView textViewTienda;
-        private TableRow lineSeparator;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.textViewTienda = (TextView) itemView.findViewById(R.id.textViewTienda);
-            this.lineSeparator = (TableRow) itemView.findViewById(R.id.hr);
         }
 
         public void bind(final String name, final OnItemClickListener listener) {
@@ -62,7 +60,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     listener.onItemClick(name, getAdapterPosition());
                 }
             });
-
         }
     }
 

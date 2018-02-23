@@ -1,6 +1,5 @@
-package com.example.lalo.sendmessages;
+package com.example.lalo.sendmessages.APIs;
 
-import android.app.Service;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
