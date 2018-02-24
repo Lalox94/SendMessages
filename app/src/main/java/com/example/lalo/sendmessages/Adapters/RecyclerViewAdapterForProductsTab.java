@@ -69,8 +69,6 @@ public class RecyclerViewAdapterForProductsTab extends
             numberPicker.setMaxValue(10);
             numberPicker.setWrapSelectorWheel(true);
             numberPicker.setValue(0);
-
-
         }
 
 

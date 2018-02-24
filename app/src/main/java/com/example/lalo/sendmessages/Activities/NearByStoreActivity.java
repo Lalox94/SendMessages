@@ -68,7 +68,6 @@ public class NearByStoreActivity extends AppCompatActivity {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.recycler_view_item, parent, false);
                 RecyclerViewAdapterForNBSA.ViewHolder vh = new RecyclerViewAdapterForNBSA.ViewHolder(view);
-
                 return vh;
             }
         };

@@ -83,6 +83,11 @@ public class StoreProductListTab extends Fragment {
         recyclerViewForProducts.setAdapter(adapterForShowTheProducts);
     }
 
+
+    public void pushOrderButton() {
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();

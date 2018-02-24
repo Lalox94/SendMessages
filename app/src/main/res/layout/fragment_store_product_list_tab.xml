@@ -17,11 +17,11 @@
     </android.support.v7.widget.RecyclerView>
 
     <Button
+        android:id="@+id/buttonOrder"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonOrder"
-        android:text="Ordenar"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Ordenar" />
 
 </RelativeLayout>
