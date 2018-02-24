@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
-
-        <TextView
-            android:id="@+id/textViewProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@+id/imageView"
-            android:text="Hola este es una prueba" />
-
-
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewForProducts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             app:srcCompat="@drawable/common_full_open_on_phone" />
+
+        <TextView
+            android:id="@+id/textViewProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageViewForProducts"
+            android:layout_centerHorizontal="true"
+            android:text="Hola este es una prueba" />
+
+
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textViewProduct"
+            android:layout_centerVertical="true"
+            android:text="$11.00 Pesos" />
 
         <NumberPicker
             android:id="@+id/numberPickerProducts"
@@ -36,6 +42,17 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="20dp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:numStars = "5"
+            android:layout_alignBottom="@+id/imageViewForProducts"
+            android:layout_alignStart="@+id/textViewPrice"
+            android:rating="4" />
+
     </RelativeLayout>
 
     <TableRow
@@ -44,7 +61,6 @@
         android:layout_height="1dp"
         android:background="#444">
     </TableRow>
-
 
 
 </LinearLayout>

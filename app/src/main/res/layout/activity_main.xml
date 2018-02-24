@@ -17,15 +17,6 @@
         tools:layout_editor_absoluteX="116dp"
         tools:layout_editor_absoluteY="231dp" />
 
-    <ImageView
-        android:id="@+id/imageviewTest"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
-        android:visibility="visible" />
-
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

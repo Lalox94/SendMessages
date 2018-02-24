@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <!-- [START firebase_service] -->
-        <activity android:name=".Activities.TiendaListActivity" />
+        <activity android:name=".Activities.NearByStoreActivity" />
 
         <service android:name=".APIs.MyFirebaseMessagingService">
             <intent-filter>

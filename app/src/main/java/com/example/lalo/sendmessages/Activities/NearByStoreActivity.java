@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapter;
+import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapterForNBSA;
 import com.example.lalo.sendmessages.R;
 import com.example.lalo.sendmessages.Models.Tienda;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -19,12 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class TiendaListActivity extends AppCompatActivity {
+public class NearByStoreActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView recyclerViewForStores;
+    private RecyclerView.LayoutManager layoutManagerForStores;
     private DatabaseReference mDatabase;
-    FirebaseRecyclerAdapter adapter2;
+    FirebaseRecyclerAdapter adapterForShowTheStores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,8 @@ public class TiendaListActivity extends AppCompatActivity {
     }
 
     public void showsStoreinFireBase() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mLayoutManager = new LinearLayoutManager(this);
+        recyclerViewForStores = (RecyclerView) findViewById(R.id.recyclerView);
+        layoutManagerForStores = new LinearLayoutManager(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Query query = FirebaseDatabase.getInstance()
@@ -48,12 +48,13 @@ public class TiendaListActivity extends AppCompatActivity {
                         .setQuery(query, Tienda.class)
                         .build();
 
-        adapter2 = new FirebaseRecyclerAdapter<Tienda, RecyclerViewAdapter.ViewHolder>(options) {
+        adapterForShowTheStores = new FirebaseRecyclerAdapter<Tienda,
+                RecyclerViewAdapterForNBSA.ViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position, @NonNull Tienda model) {
-                holder.bind(options.getSnapshots().get(position).getNombre(), new RecyclerViewAdapter.OnItemClickListener() {
+            protected void onBindViewHolder(@NonNull RecyclerViewAdapterForNBSA.ViewHolder holder, int position, @NonNull Tienda model) {
+                holder.bind(options.getSnapshots().get(position), new RecyclerViewAdapterForNBSA.OnItemClickListener() {
                     @Override
-                    public void onItemClick(String name, int position) {
+                    public void onItemClick() {
                         Intent i = new Intent(getApplicationContext(), StoreActivity.class);
                         startActivity(i);
                     }
@@ -61,32 +62,32 @@ public class TiendaListActivity extends AppCompatActivity {
             }
 
             @Override
-            public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public RecyclerViewAdapterForNBSA.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 // Create a new instance of the ViewHolder, in this case we are using a custom
                 // layout called R.layout.message for each item
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.recycler_view_item, parent, false);
-                RecyclerViewAdapter.ViewHolder vh = new RecyclerViewAdapter.ViewHolder(view);
+                RecyclerViewAdapterForNBSA.ViewHolder vh = new RecyclerViewAdapterForNBSA.ViewHolder(view);
 
                 return vh;
             }
         };
 
         // Boost Perfomance
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(adapter2);
+        recyclerViewForStores.setHasFixedSize(true);
+        recyclerViewForStores.setLayoutManager(layoutManagerForStores);
+        recyclerViewForStores.setAdapter(adapterForShowTheStores);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter2.startListening();
+        adapterForShowTheStores.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        adapter2.startListening();
+        adapterForShowTheStores.startListening();
     }
 }

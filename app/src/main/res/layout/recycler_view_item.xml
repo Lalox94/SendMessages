@@ -1,24 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/textViewTienda"
-        android:text="Hola este es una prueba" />
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/imageViewStore"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="17dp"
+            app:srcCompat="@drawable/common_full_open_on_phone" />
+
+        <TextView
+            android:id="@+id/textViewStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/imageViewStore"
+            android:text="Hola este es una prueba"
+            android:textAlignment="viewStart"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewStoreTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textViewStoreName"
+            android:layout_centerVertical="true"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewStoreDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textViewStoreTime"
+            android:text="TextView" />
+
+    </RelativeLayout>
 
     <TableRow
         android:id="@+id/hr"
-        android:layout_below="@id/textViewTienda"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="1dp"
         android:background="#444">
     </TableRow>
-
-
-
 
 </LinearLayout>

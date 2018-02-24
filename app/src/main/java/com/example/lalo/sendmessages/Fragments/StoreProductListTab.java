@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapter;
 import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapterForProductsTab;
 import com.example.lalo.sendmessages.Models.Tienda;
 import com.example.lalo.sendmessages.R;
@@ -21,15 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StoreProductListTab extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private DatabaseReference mDatabase;
-    FirebaseRecyclerAdapter adapter2;
+    private RecyclerView recyclerViewForProducts;
+    private RecyclerView.LayoutManager layoutManagerForProducts;
+    private DatabaseReference firebaseDataBaseReference;
+    FirebaseRecyclerAdapter adapterForShowTheProducts;
 
     public StoreProductListTab() {
         // Required empty public constructor
@@ -50,9 +46,9 @@ public class StoreProductListTab extends Fragment {
     }
 
     public void showProductsInStore(View rootView) {
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewProductsFragment);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        recyclerViewForProducts = (RecyclerView) rootView.findViewById(R.id.recyclerViewProductsFragment);
+        layoutManagerForProducts = new LinearLayoutManager(getActivity());
+        firebaseDataBaseReference = FirebaseDatabase.getInstance().getReference();
 
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
@@ -64,7 +60,7 @@ public class StoreProductListTab extends Fragment {
                         .setQuery(query, Tienda.class)
                         .build();
 
-        adapter2 = new FirebaseRecyclerAdapter<Tienda, RecyclerViewAdapterForProductsTab.ViewHolder>(options) {
+        adapterForShowTheProducts = new FirebaseRecyclerAdapter<Tienda, RecyclerViewAdapterForProductsTab.ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull RecyclerViewAdapterForProductsTab.ViewHolder holder, int position, @NonNull Tienda model) {
                 holder.bind(options.getSnapshots().get(position).getNombre());
@@ -82,21 +78,21 @@ public class StoreProductListTab extends Fragment {
         };
 
         // Boost Perfomance
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(adapter2);
+        recyclerViewForProducts.setHasFixedSize(true);
+        recyclerViewForProducts.setLayoutManager(layoutManagerForProducts);
+        recyclerViewForProducts.setAdapter(adapterForShowTheProducts);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        adapter2.startListening();
+        adapterForShowTheProducts.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        adapter2.startListening();
+        adapterForShowTheProducts.startListening();
     }
 
 }
