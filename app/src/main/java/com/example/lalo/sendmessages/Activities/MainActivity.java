@@ -20,8 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSendMessageButton = (Button) findViewById(R.id.buttonSearchStores);
 
+       // ShowsAuthenticationProviders();
+
+        mSendMessageButton = (Button) findViewById(R.id.buttonSearchStores);
         mSendMessageButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

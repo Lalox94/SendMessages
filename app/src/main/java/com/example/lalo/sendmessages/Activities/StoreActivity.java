@@ -10,10 +10,14 @@ import android.os.Bundle;
 import com.example.lalo.sendmessages.Fragments.MyProductListTab;
 import com.example.lalo.sendmessages.Fragments.StoreContactTab;
 import com.example.lalo.sendmessages.Fragments.StoreProductListTab;
+import com.example.lalo.sendmessages.Models.Tienda;
 import com.example.lalo.sendmessages.R;
+import com.google.gson.Gson;
 
 public class StoreActivity extends AppCompatActivity implements MyProductListTab.OnFragmentInteractionListener,
         StoreProductListTab.OnFragmentInteractionListener, StoreContactTab.OnFragmentInteractionListener{
+
+    private static String intentTiendaObjectDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,10 @@ public class StoreActivity extends AppCompatActivity implements MyProductListTab
         tabLayout.addTab(tabLayout.newTab().setText("Contacto"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        intentTiendaObjectDetails = getIntent().getStringExtra("TiendaAsString");
+
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
         final PagerAdapter adapter = new com.example.lalo.sendmessages.Adapters.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -39,18 +46,20 @@ public class StoreActivity extends AppCompatActivity implements MyProductListTab
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }
 
+
+    public static String get_Message(){
+        return intentTiendaObjectDetails;
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
-
     }
 }

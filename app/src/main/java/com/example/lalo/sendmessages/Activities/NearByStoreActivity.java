@@ -18,12 +18,14 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.gson.Gson;
 
 public class NearByStoreActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewForStores;
     private RecyclerView.LayoutManager layoutManagerForStores;
     private DatabaseReference mDatabase;
+    private Gson gson;
     FirebaseRecyclerAdapter adapterForShowTheStores;
 
     @Override
@@ -51,11 +53,15 @@ public class NearByStoreActivity extends AppCompatActivity {
         adapterForShowTheStores = new FirebaseRecyclerAdapter<Tienda,
                 RecyclerViewAdapterForNBSA.ViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull RecyclerViewAdapterForNBSA.ViewHolder holder, int position, @NonNull Tienda model) {
+            protected void onBindViewHolder(@NonNull RecyclerViewAdapterForNBSA.ViewHolder holder, final int position, @NonNull Tienda model) {
                 holder.bind(options.getSnapshots().get(position), new RecyclerViewAdapterForNBSA.OnItemClickListener() {
                     @Override
                     public void onItemClick() {
+                        Tienda tienda = getSnapshots().get(position);
+                        gson = new Gson();
+                        String tiendaDataObjectAsAString = gson.toJson(tienda);
                         Intent i = new Intent(getApplicationContext(), StoreActivity.class);
+                        i.putExtra("TiendaAsString",tiendaDataObjectAsAString);
                         startActivity(i);
                     }
                 });
@@ -77,6 +83,7 @@ public class NearByStoreActivity extends AppCompatActivity {
         recyclerViewForStores.setLayoutManager(layoutManagerForStores);
         recyclerViewForStores.setAdapter(adapterForShowTheStores);
     }
+
 
     @Override
     protected void onStart() {

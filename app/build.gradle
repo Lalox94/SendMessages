@@ -28,6 +28,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:recyclerview-v7:26'
     implementation 'com.android.support:design:27.0.2'
+    implementation 'com.google.code.gson:gson:2.8.2'
     // Firebase API
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
@@ -43,6 +44,8 @@ dependencies {
     }
     implementation "com.android.support:support-fragment:26.1.0"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    // Dialog
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
 }
 
