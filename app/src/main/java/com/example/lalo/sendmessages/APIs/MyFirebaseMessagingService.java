@@ -1,5 +1,7 @@
 package com.example.lalo.sendmessages.APIs;
 
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.example.lalo.sendmessages.Activities.StoreActivity;
@@ -17,5 +19,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // message, here is where that should be initiated.
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+
+
+        String token = remoteMessage.getData().get("token");
+        String parentId = remoteMessage.getData().get("parentId");
+        Intent intent = new Intent("com.example.lalo.tienda_FCM-MESSAGE");
+        intent.putExtra("token",token);
+        intent.putExtra("parentId",parentId);
+        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager.sendBroadcast(intent);
     }
+
 }

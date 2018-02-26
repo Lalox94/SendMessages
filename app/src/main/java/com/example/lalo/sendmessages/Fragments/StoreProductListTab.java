@@ -1,10 +1,15 @@
 package com.example.lalo.sendmessages.Fragments;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,7 +39,7 @@ public class StoreProductListTab extends Fragment{
     private RecyclerView recyclerViewForProducts;
     private RecyclerView.LayoutManager layoutManagerForProducts;
     private DatabaseReference firebaseDataBaseReference;
-
+    MaterialDialog materialDialog;
     private Button orderButton;
 
     public StoreProductListTab() {
@@ -47,6 +52,8 @@ public class StoreProductListTab extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_store_product_list_tab, container,
                 false);
 
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mHandler,new IntentFilter("com.example.lalo.tienda_FCM-MESSAGE"));
+
         showProductsInStore(rootView);
 
         orderButton = (Button) rootView.findViewById(R.id.buttonOrder);
@@ -54,11 +61,20 @@ public class StoreProductListTab extends Fragment{
             @Override
             public void onClick(View view) {
                 pushOrderButton();
-                showDialog();
+                showDialogWaitingForResponse();
             }
         });
+
         return rootView;
     }
+
+    private BroadcastReceiver mHandler = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, final Intent intent) {
+            stopDialog();
+            showDialogForResponseReceived();
+        }
+    };
 
 
     public interface OnFragmentInteractionListener {
@@ -126,12 +142,25 @@ public class StoreProductListTab extends Fragment{
         id.child("Tienda").setValue(tienda);
     }
 
-    public void showDialog() {
-        MaterialDialog materialDialog = new MaterialDialog.Builder(getContext())
+    public void showDialogWaitingForResponse() {
+            materialDialog = new MaterialDialog.Builder(getContext())
                     .title("¡Gracias por su compra!")
                     .content("Esperando respuesta")
                     .progress(true, 0)
                     .show();
+    }
+
+    public void showDialogForResponseReceived(){
+        new MaterialDialog.Builder(getContext())
+                .title("Respuesta obtenida")
+                .content("¡Tu pedido esta en camino!")
+                .positiveText("Seguir repartidor")
+                .negativeText("Regresar")
+                .show();
+    }
+
+    public void stopDialog(){
+        materialDialog.cancel();
     }
 
     @Override

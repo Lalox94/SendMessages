@@ -52,8 +52,6 @@ public class RecyclerViewAdapterForNBSA extends RecyclerView.Adapter<RecyclerVie
             this.textViewStoreTime = (TextView) itemView.findViewById(R.id.textViewStoreTime);
             this.textViewtoreDistance = (TextView) itemView.findViewById(R.id.textViewStoreDistance);
             this.imageViewStore = (ImageView) itemView.findViewById(R.id.imageViewStore);
-
-
         }
 
         public void bind(Tienda tienda, final OnItemClickListener listener) {
@@ -68,7 +66,6 @@ public class RecyclerViewAdapterForNBSA extends RecyclerView.Adapter<RecyclerVie
             GlideApp.with(itemView.getContext())
                     .load(spaceRef)
                     .into(imageViewStore);
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

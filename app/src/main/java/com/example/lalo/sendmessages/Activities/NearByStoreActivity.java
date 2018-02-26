@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapterForNBSA;
-import com.example.lalo.sendmessages.R;
 import com.example.lalo.sendmessages.Models.Tienda;
+import com.example.lalo.sendmessages.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +34,7 @@ public class NearByStoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tienda_list);
         showsStoreinFireBase();
     }
+
 
     public void showsStoreinFireBase() {
         recyclerViewForStores = (RecyclerView) findViewById(R.id.recyclerView);
@@ -83,7 +84,6 @@ public class NearByStoreActivity extends AppCompatActivity {
         recyclerViewForStores.setLayoutManager(layoutManagerForStores);
         recyclerViewForStores.setAdapter(adapterForShowTheStores);
     }
-
 
     @Override
     protected void onStart() {
