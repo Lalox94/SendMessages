@@ -1,6 +1,5 @@
 package com.example.lalo.sendmessages.Fragments;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,10 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lalo.sendmessages.Activities.StoreActivity;
 import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapterForProductsTab;
+import com.example.lalo.sendmessages.Models.Productos;
 import com.example.lalo.sendmessages.Models.Tienda;
 import com.example.lalo.sendmessages.Models.User;
 import com.example.lalo.sendmessages.R;
@@ -35,11 +34,12 @@ import com.google.gson.Gson;
 public class StoreProductListTab extends Fragment{
 
     FirebaseRecyclerAdapter adapterForShowTheProducts;
+    MaterialDialog materialDialog;
     Gson gson;
+
     private RecyclerView recyclerViewForProducts;
     private RecyclerView.LayoutManager layoutManagerForProducts;
     private DatabaseReference firebaseDataBaseReference;
-    MaterialDialog materialDialog;
     private Button orderButton;
 
     public StoreProductListTab() {
@@ -52,7 +52,8 @@ public class StoreProductListTab extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_store_product_list_tab, container,
                 false);
 
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mHandler,new IntentFilter("com.example.lalo.tienda_FCM-MESSAGE"));
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mHandler,
+                new IntentFilter("com.example.lalo.tienda_FCM-MESSAGE"));
 
         showProductsInStore(rootView);
 
@@ -83,7 +84,6 @@ public class StoreProductListTab extends Fragment{
     }
 
     public void showProductsInStore(View rootView) {
-
         recyclerViewForProducts = (RecyclerView) rootView.findViewById
                 (R.id.recyclerViewProductsFragment);
         layoutManagerForProducts = new LinearLayoutManager(getActivity());
@@ -91,22 +91,22 @@ public class StoreProductListTab extends Fragment{
 
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Tiendas")
+                .child("Productos")
                 .limitToLast(50);
 
-        final FirebaseRecyclerOptions<Tienda> options =
-                new FirebaseRecyclerOptions.Builder<Tienda>()
-                        .setQuery(query, Tienda.class)
+        final FirebaseRecyclerOptions<Productos> options =
+                new FirebaseRecyclerOptions.Builder<Productos>()
+                        .setQuery(query, Productos.class)
                         .build();
 
         adapterForShowTheProducts = new FirebaseRecyclerAdapter
-                <Tienda, RecyclerViewAdapterForProductsTab.ViewHolder>(options) {
+                <Productos, RecyclerViewAdapterForProductsTab.ViewHolder>(options) {
 
             @Override
             protected void onBindViewHolder
                     (@NonNull RecyclerViewAdapterForProductsTab.ViewHolder holder,
-                     int position, @NonNull Tienda model) {
-                holder.bind(options.getSnapshots().get(position).getNombre());
+                     int position, @NonNull Productos model) {
+                holder.bind(options.getSnapshots().get(position));
             }
 
             @Override
@@ -119,14 +119,12 @@ public class StoreProductListTab extends Fragment{
                 return vh;
             }
         };
-
         recyclerViewForProducts.setHasFixedSize(true);
         recyclerViewForProducts.setLayoutManager(layoutManagerForProducts);
         recyclerViewForProducts.setAdapter(adapterForShowTheProducts);
     }
 
     public void pushOrderButton() {
-
         firebaseDataBaseReference = FirebaseDatabase.getInstance().getReference();
 
         String tiendaDataObjectAsString = StoreActivity.get_Message();

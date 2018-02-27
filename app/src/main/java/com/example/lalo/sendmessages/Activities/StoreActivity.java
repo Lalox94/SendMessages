@@ -34,7 +34,8 @@ public class StoreActivity extends AppCompatActivity implements MyProductListTab
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
-        final PagerAdapter adapter = new com.example.lalo.sendmessages.Adapters.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        final PagerAdapter adapter = new com.example.lalo.sendmessages.Adapters.PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

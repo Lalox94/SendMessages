@@ -9,6 +9,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.lalo.sendmessages.APIs.GlideApp;
+import com.example.lalo.sendmessages.Models.Productos;
 import com.example.lalo.sendmessages.R;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,7 +33,6 @@ public class RecyclerViewAdapterForProductsTab extends
     @Override
     public void onBindViewHolder(RecyclerViewAdapterForProductsTab.ViewHolder holder, int position) {
         // I think this is not calling directly
-        holder.bind("Testing");
     }
 
     @Override
@@ -44,22 +44,25 @@ public class RecyclerViewAdapterForProductsTab extends
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewProduct;
+        private TextView textViewPrice;
         private NumberPicker numberPicker;
         private ImageView imageViewProduct;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.textViewProduct = (TextView) itemView.findViewById(R.id.textViewProduct);
+            this.textViewPrice = (TextView) itemView.findViewById(R.id.textViewPrice);
             this.numberPicker = (NumberPicker) itemView.findViewById(R.id.numberPickerProducts);
             this.imageViewProduct = (ImageView) itemView.findViewById(R.id.imageViewForProducts);
         }
 
-        public void bind(final String name) {
-            this.textViewProduct.setText(name);
+        public void bind(Productos producto) {
+            this.textViewProduct.setText(producto.getNombre());
+            this.textViewPrice.setText("$"+producto.getPrecio()+".00 Pesos");
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
-            StorageReference spaceRef = storageRef.child("Cocacola.jpg");
+            StorageReference spaceRef = storageRef.child(producto.getImagen());
 
             GlideApp.with(itemView.getContext())
                     .load(spaceRef)
@@ -70,9 +73,6 @@ public class RecyclerViewAdapterForProductsTab extends
             numberPicker.setWrapSelectorWheel(true);
             numberPicker.setValue(0);
         }
-
-
-
     }
 
 }

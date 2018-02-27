@@ -26,7 +26,6 @@
             android:layout_centerHorizontal="true"
             android:text="Hola este es una prueba" />
 
-
         <TextView
             android:id="@+id/textViewPrice"
             android:layout_width="wrap_content"
@@ -46,9 +45,8 @@
         <RatingBar
             android:id="@+id/ratingBar"
             style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars = "5"
             android:layout_alignBottom="@+id/imageViewForProducts"
             android:layout_alignStart="@+id/textViewPrice"
             android:rating="4" />
