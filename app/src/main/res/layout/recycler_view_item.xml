@@ -29,7 +29,8 @@
             android:layout_toEndOf="@+id/imageViewStore"
             android:text="Hola este es una prueba"
             android:textAlignment="viewStart"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="15dp"/>
 
         <TextView
             android:id="@+id/textViewStoreTime"
@@ -44,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:paddingBottom="10dp"
             android:layout_alignStart="@+id/textViewStoreTime"
             android:text="TextView" />
 

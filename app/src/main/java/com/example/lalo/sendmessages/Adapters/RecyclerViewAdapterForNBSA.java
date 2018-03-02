@@ -32,7 +32,6 @@ public class RecyclerViewAdapterForNBSA extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
     }
 
     @Override
@@ -74,10 +73,16 @@ public class RecyclerViewAdapterForNBSA extends RecyclerView.Adapter<RecyclerVie
                 }
             });
         }
+
+
     }
 
     public interface OnItemClickListener {
         void onItemClick();
+    }
+
+    public interface RecyclewViewReadyCallback {
+        void onLayourReady();
     }
 
 }

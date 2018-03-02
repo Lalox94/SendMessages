@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapterForNBSA;
 import com.example.lalo.sendmessages.Models.Tienda;
 import com.example.lalo.sendmessages.R;
@@ -26,7 +28,9 @@ public class NearByStoreActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManagerForStores;
     private DatabaseReference mDatabase;
     private Gson gson;
+
     FirebaseRecyclerAdapter adapterForShowTheStores;
+    MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +39,12 @@ public class NearByStoreActivity extends AppCompatActivity {
         showsStoreinFireBase();
     }
 
-
     public void showsStoreinFireBase() {
+        showDialogForWaitingTheServer();
+        showTheNearestStoresFromUSer();
+    }
+
+    public void showTheNearestStoresFromUSer(){
         recyclerViewForStores = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManagerForStores = new LinearLayoutManager(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -75,14 +83,29 @@ public class NearByStoreActivity extends AppCompatActivity {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.recycler_view_item, parent, false);
                 RecyclerViewAdapterForNBSA.ViewHolder vh = new RecyclerViewAdapterForNBSA.ViewHolder(view);
+                view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        materialDialog.cancel();
+                    }
+                });
                 return vh;
             }
         };
-
         // Boost Perfomance
         recyclerViewForStores.setHasFixedSize(true);
         recyclerViewForStores.setLayoutManager(layoutManagerForStores);
         recyclerViewForStores.setAdapter(adapterForShowTheStores);
+
+    }
+
+
+    public void showDialogForWaitingTheServer() {
+        materialDialog =  new MaterialDialog.Builder(this)
+                .title("Cargando...")
+                .content("Espera un momento")
+                .progress(true, 0)
+                .show();
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +42,9 @@ public class StoreProductListTab extends Fragment{
     private RecyclerView recyclerViewForProducts;
     private RecyclerView.LayoutManager layoutManagerForProducts;
     private DatabaseReference firebaseDataBaseReference;
-
     private Button orderButton;
     private TextView totalTextiView;
+    private SearchView searchProduct;
 
     public StoreProductListTab() {
         // Required empty public constructor
@@ -61,6 +62,10 @@ public class StoreProductListTab extends Fragment{
         showProductsInStore(rootView);
 
         totalTextiView = (TextView) rootView.findViewById(R.id.textViewTotal);
+        searchProduct = (SearchView) rootView.findViewById(R.id.searchViewProduct);
+        searchProduct.setQueryHint("Buscar Producto....");
+        searchProduct.setIconified(false);
+        searchProduct.clearFocus();
 
         orderButton = (Button) rootView.findViewById(R.id.buttonOrder);
         orderButton.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +108,7 @@ public class StoreProductListTab extends Fragment{
                 new FirebaseRecyclerOptions.Builder<Productos>()
                         .setQuery(query, Productos.class)
                         .build();
+
 
         adapterForShowTheProducts = new FirebaseRecyclerAdapter
                 <Productos, RecyclerViewAdapterForProductsTab.ViewHolder>(options) {
