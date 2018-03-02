@@ -11,11 +11,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lalo.sendmessages.Activities.StoreActivity;
 import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapterForProductsTab;
@@ -40,7 +41,9 @@ public class StoreProductListTab extends Fragment{
     private RecyclerView recyclerViewForProducts;
     private RecyclerView.LayoutManager layoutManagerForProducts;
     private DatabaseReference firebaseDataBaseReference;
+
     private Button orderButton;
+    private TextView totalTextiView;
 
     public StoreProductListTab() {
         // Required empty public constructor
@@ -56,6 +59,8 @@ public class StoreProductListTab extends Fragment{
                 new IntentFilter("com.example.lalo.tienda_FCM-MESSAGE"));
 
         showProductsInStore(rootView);
+
+        totalTextiView = (TextView) rootView.findViewById(R.id.textViewTotal);
 
         orderButton = (Button) rootView.findViewById(R.id.buttonOrder);
         orderButton.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +111,7 @@ public class StoreProductListTab extends Fragment{
             protected void onBindViewHolder
                     (@NonNull RecyclerViewAdapterForProductsTab.ViewHolder holder,
                      int position, @NonNull Productos model) {
-                holder.bind(options.getSnapshots().get(position));
+                holder.bind(options.getSnapshots().get(position), totalTextiView);
             }
 
             @Override
@@ -118,6 +123,7 @@ public class StoreProductListTab extends Fragment{
                         new RecyclerViewAdapterForProductsTab.ViewHolder(view);
                 return vh;
             }
+
         };
         recyclerViewForProducts.setHasFixedSize(true);
         recyclerViewForProducts.setLayoutManager(layoutManagerForProducts);

@@ -9,17 +9,21 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.lalo.sendmessages.APIs.GlideApp;
+import com.example.lalo.sendmessages.Fragments.StoreProductListTab;
 import com.example.lalo.sendmessages.Models.Productos;
 import com.example.lalo.sendmessages.R;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.json.JSONException;
+import org.w3c.dom.Text;
+
 public class RecyclerViewAdapterForProductsTab extends
         RecyclerView.Adapter<RecyclerViewAdapterForProductsTab.ViewHolder> {
 
     int layout;
-
     public RecyclerViewAdapterForProductsTab() {
+
     }
 
     @Override
@@ -48,6 +52,9 @@ public class RecyclerViewAdapterForProductsTab extends
         private NumberPicker numberPicker;
         private ImageView imageViewProduct;
 
+        int totalForParticularProduct;
+        String test;
+
         public ViewHolder(View itemView) {
             super(itemView);
             this.textViewProduct = (TextView) itemView.findViewById(R.id.textViewProduct);
@@ -56,7 +63,7 @@ public class RecyclerViewAdapterForProductsTab extends
             this.imageViewProduct = (ImageView) itemView.findViewById(R.id.imageViewForProducts);
         }
 
-        public void bind(Productos producto) {
+        public void bind(final Productos producto, final TextView total) {
             this.textViewProduct.setText(producto.getNombre());
             this.textViewPrice.setText("$"+producto.getPrecio()+".00 Pesos");
 
@@ -72,7 +79,23 @@ public class RecyclerViewAdapterForProductsTab extends
             numberPicker.setMaxValue(10);
             numberPicker.setWrapSelectorWheel(true);
             numberPicker.setValue(0);
+
+            numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+               @Override
+               public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
+                    // Change price for Double.
+                    totalForParticularProduct = Integer.parseInt(producto.getPrecio()) * newValue;
+                    Productos.setPriceForProduct(producto.getNombre(), totalForParticularProduct);
+                    test = Integer.toString(Productos.getTest());
+                    total.setText("TOTAL = $"+test+".00 PESOS");
+                    Productos.resetTotalAmountProducts();
+               }
+           });
+
         }
+
+
+
     }
 
 }
