@@ -1,9 +1,11 @@
 package com.example.lalo.sendmessages.Fragments;
 
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,12 @@ import com.example.lalo.sendmessages.APIs.GlideApp;
 import com.example.lalo.sendmessages.R;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.holder.BadgeStyle;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +28,8 @@ import com.google.firebase.storage.StorageReference;
 public class StoreContactTab extends Fragment {
 
     ImageView imageViewForStore;
+    private Toolbar toolbarForMenuDrawer;
+
 
     public StoreContactTab() {
         // Required empty public constructor

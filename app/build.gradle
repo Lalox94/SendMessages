@@ -29,6 +29,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26'
     implementation 'com.android.support:design:27.0.2'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.android.support:support-annotations:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     // Firebase API
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
@@ -46,10 +48,16 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     // Dialog
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-    implementation 'com.android.support:design:27.0.2'
+    // Drawer Navigation
+    implementation('com.mikepenz:materialdrawer:6.0.6@aar') {
+        transitive = true
+    }
+    //the core iconcis library (without any widgets)
+    implementation "com.mikepenz:iconics-core:3.0.3@aar"
+    implementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
+
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
 }
-
-
 apply plugin: 'com.google.gms.google-services'
 
 

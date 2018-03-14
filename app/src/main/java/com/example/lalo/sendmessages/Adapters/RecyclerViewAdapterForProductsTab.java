@@ -9,14 +9,10 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.lalo.sendmessages.APIs.GlideApp;
-import com.example.lalo.sendmessages.Fragments.StoreProductListTab;
 import com.example.lalo.sendmessages.Models.Productos;
 import com.example.lalo.sendmessages.R;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import org.json.JSONException;
-import org.w3c.dom.Text;
 
 public class RecyclerViewAdapterForProductsTab extends
         RecyclerView.Adapter<RecyclerViewAdapterForProductsTab.ViewHolder> {
@@ -86,16 +82,13 @@ public class RecyclerViewAdapterForProductsTab extends
                     // Change price for Double.
                     totalForParticularProduct = Integer.parseInt(producto.getPrecio()) * newValue;
                     Productos.setPriceForProduct(producto.getNombre(), totalForParticularProduct);
-                    test = Integer.toString(Productos.getTest());
+                    Productos.setProductsUnit(producto.getNombre(), newValue);
+                    test = Integer.toString(Productos.getTotalPrice());
                     total.setText("TOTAL = $"+test+".00 PESOS");
-                    Productos.resetTotalAmountProducts();
+                    Productos.resetTotalPrice();
                }
            });
-
         }
-
-
-
     }
 
 }
