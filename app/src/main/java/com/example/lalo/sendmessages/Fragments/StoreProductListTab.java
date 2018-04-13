@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.lalo.sendmessages.Activities.ProductStatusActivity;
 import com.example.lalo.sendmessages.Activities.StoreActivity;
 import com.example.lalo.sendmessages.Adapters.RecyclerViewAdapterForProductsTab;
 import com.example.lalo.sendmessages.Models.Productos;
@@ -80,7 +81,9 @@ public class StoreProductListTab extends Fragment{
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialogConfirmation();
+                Intent i = new Intent(getActivity(), ProductStatusActivity.class);
+                startActivity(i);
+                // showDialogConfirmation();
             }
         });
         return rootView;
@@ -164,6 +167,7 @@ public class StoreProductListTab extends Fragment{
                     e.printStackTrace();
                 }
             }
+            productsInformation += "Total: "+Productos.getTotalPrice()+"\n";
         }
         return productsInformation;
     }
@@ -258,9 +262,16 @@ public class StoreProductListTab extends Fragment{
     public void showDialogForResponseReceived(){
         new MaterialDialog.Builder(getContext())
                 .title("Respuesta obtenida")
-                .content("¡Tu pedido esta en camino!")
-                .positiveText("Seguir repartidor")
+                .content("¡Tu pedido ha sido aceptado!")
+                .positiveText("Ver estado")
                 .negativeText("Regresar")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Intent i = new Intent(getActivity(), ProductStatusActivity.class);
+                        startActivity(i);
+                    }
+                })
                 .show();
     }
 

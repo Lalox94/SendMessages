@@ -32,9 +32,10 @@
 
         <activity android:name=".Activities.StoreActivity" />
         <activity
-            android:name=".Adapters.ProductStatusActivity"
+            android:name=".Activities.ProductStatusActivity"
             android:label="@string/title_activity_product_status"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

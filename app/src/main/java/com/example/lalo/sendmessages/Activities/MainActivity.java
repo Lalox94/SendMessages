@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         //ShowsAuthenticationProviders();
 
         showMenuDrawerNavigation();
-
         mSendMessageButton = (Button) findViewById(R.id.buttonSearchStores);
         mSendMessageButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
     private void ShowsAuthenticationProviders() {
@@ -64,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         toolbarForMenuDrawer = (Toolbar) findViewById(R.id.toolbarMainActivity);
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Test1");
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName("Test2");
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Mis Listas");
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName("Mis compras");
 
         //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 )
                 .build();
         // It updates by itself automatically
-        item1.withName("Tienes un pedido en curso").withBadge("19").withBadgeStyle(new BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_red_700));
+        item1.withName("Tienes un pedido en curso").withBadge("1").withBadgeStyle(new BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_red_700));
         //notify the drawer about the updated element. it will take care about everything else
         result.updateItem(item1);
     }
